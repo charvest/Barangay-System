@@ -43,7 +43,7 @@ body {
 
 .sidebar.collapsed {
   width: 60px !important; /* Collapsed width */
-  opacity: 0.9; /* Slight opacity change for a smooth effect */
+  opacity: 0.9; /* Sglight opacity change for a smooth effect */
 }
 
 .sidebar.collapsed .user-profile {
