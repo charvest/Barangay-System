@@ -1,0 +1,384 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+}
+
+.login-signup-form {
+    display: flex;
+    width: 100%;
+    max-width: 900px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 1.2s ease;
+}
+
+.image-section {
+    flex-basis: 50%;
+    background: linear-gradient(135deg, #4CAF50, #00c6ff);
+}
+
+.image-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.85;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.image-section img:hover {
+    transform: scale(1.05);
+    opacity: 1;
+}
+
+.form-section {
+    flex-basis: 60%;
+    padding: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    position: relative;
+}
+
+.form-container {
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    animation: slideUp 1.5s ease-out forwards;
+    opacity: 0;
+}
+
+h1 {
+    color: #333;
+    font-size: 28px;
+    margin-bottom: 40px;
+    position: relative;
+    animation: textFadeIn 1.5s ease-out 0.5s forwards;
+    opacity: 0;
+}
+
+h1::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(135deg, #28a745, #28a745);
+    margin: 20px auto 0;
+    border-radius: 4px;
+    animation: scaleBar 0.8s ease-out 1s forwards;
+    opacity: 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+}
+
+input {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    font-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    animation: textFadeIn 1.8s ease-out 0.8s forwards;
+    opacity: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Style for the success alert message */
+.custom-alert {
+    margin-top: 15px;
+    padding: 0;
+    background-color: transparent;
+    color: #28a745;
+    font-size: 14px;
+    text-align: center;
+    display: none; /* Hidden by default */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    box-shadow: none;
+}
+
+/* Show alert when .show class is added */
+.custom-alert.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Style for the error alert message */
+.custom-alert.error {
+    color: red;
+}
+
+input:focus {
+    outline: none;
+    border-color: #28a745; 
+}
+
+input::placeholder {
+    position: absolute;
+    left: 20px;
+    top: 17px;
+    color: #888;
+    transition: transform 0.3s ease, font-size 0.3s ease, color 0.3s ease;
+}
+
+input:focus::placeholder {
+    transform: translateY(-15px); /* TEXT  */
+    font-size: 12px; /* SIZE NG PLACE HOLDER */
+    color: #28a745; /* ITO YUNG PALIT KULAY PAG */
+}
+
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.password-wrapper input[type="password"],
+.password-wrapper input[type="text"] {
+    width: 100%;
+    padding-right: 40px; /* Make space for the eye icon */
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    padding: 12px 10px;
+    box-sizing: border-box;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toggle-password svg {
+    width: 24px;
+    height: 24px;
+    fill: #888;
+}
+
+.toggle-password:hover svg {
+    fill: #28a745;
+}
+
+
+button {
+    padding: 15px;
+    background: #28a745; /* GREEN BUTTON TO KULAY PARA PAG MAGPAPALIT*/
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 6px 15px rgba(40, 167, 69, 0.2); 
+    animation: textFadeIn 2s ease-out 1s forwards;
+    opacity: 0;
+}
+
+button:hover {
+    background: #218838; /* HOVER TO BARTS */
+    box-shadow: 0 8px 20px rgba(40, 167, 69, 0.4);
+}
+
+p.account {
+    font-size: 14px;
+    color: #666;
+    margin-top: 20px;
+    animation: textFadeIn 2.2s ease-out 1.2s forwards;
+    opacity: 0;
+}
+/* SIGN-UP TO NA WORD SA BOTTOM */
+p.account a {
+    color: #0072ff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+p.account a:hover {
+    text-decoration: underline;
+}
+
+/* TEXT ANIMATION */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes textFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleBar {
+    0% {
+        opacity: 0;
+        width: 0;
+    }
+    100% {
+        opacity: 1;
+        width: 80px;
+    }
+}
+/* RESPONSIVE TO  */
+@media (max-width: 768px) {
+    .login-signup-form {
+        flex-direction: column;
+        box-shadow: none;
+    }
+    
+    .image-section, .form-section {
+        flex-basis: 100%;
+    }
+
+    .image-section {
+        display: none;
+    }
+
+    .form-section {
+        padding: 50px;
+    }
+}
+
+/* LOGO NG KALAWAAN */
+
+.Logo {
+  max-width:85px;
+  margin: 0 auto;
+  margin-bottom:20px;
+  display: block;
+}
+
+/* REMEMBER ME KAPAG KAPILING KA */
+.remember-me {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+    animation: textFadeIn 2s ease-out 1s forwards;
+    opacity: 0;
+}
+
+.remember-me input[type="checkbox"] {
+    margin-right: 10px;
+    width: 18px;
+    height: 18px;
+}
+
+.remember-me label {
+    cursor: pointer;
+    color: #333;
+}
+
+.remember-me input[type="checkbox"]:checked + label {
+    color: #28a745;
+}
+
+/* SA CHECKBOX TO IDOL */
+@keyframes textFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.forgot-password a {
+    color: #0072ff;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+    animation: textFadeIn 2s ease-out 1s forwards;
+    opacity: 0; /* Initially hidden to follow the animation pattern */
+}
+
+.forgot-password a:hover {
+    color: #0056b3; /* Darker blue on hover */
+    transform: translateY(-2px); /* Slight movement up on hover */
+    text-decoration: underline;
+}
+
+
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.password-wrapper input[type="password"],
+.password-wrapper input[type="text"] {
+    width: 100%;
+    padding-right: 40px; /* Make space for the eye icon */
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    padding: 12px 10px;
+    box-sizing: border-box;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toggle-password svg {
+    width: 24px;
+    height: 24px;
+    fill: #888;
+}
+
+.toggle-password:hover svg {
+    fill: #28a745;
+}
+
+

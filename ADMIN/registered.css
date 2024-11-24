@@ -1,0 +1,110 @@
+/* Table container for responsiveness */
+.table-container {
+  width: 100%;
+  overflow-x: auto;  /* Enables horizontal scrolling for smaller screens */
+  margin-top: 20px;
+}
+
+/* General table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th, td {
+  text-align: left;
+  padding: 12px 8px; /* Slightly increase padding for better readability */
+  border: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+  position: -webkit-sticky; /* Sticky header for large tables */
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Loading message styling */
+.loading-text {
+  text-align: center;
+  font-size: 1.2em;
+  color: #999;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  th, td {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  /* Optional: Hide some columns on smaller screens */
+  td:nth-child(4), th:nth-child(4), td:nth-child(5), th:nth-child(5) {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  th, td {
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  /* Hide more columns for very small screens to keep it readable */
+  td:nth-child(3), th:nth-child(3), td:nth-child(6), th:nth-child(6) {
+    display: none;
+  }
+}
+
+/* Add overflow scrolling for large datasets */
+.table-container-scrollable {
+  max-height: 400px; /* Adjust height as necessary */
+  overflow-y: scroll;
+}
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+
+.btn {
+  cursor: pointer;
+  padding: 5px;
+}
+
+.btn.edit {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.btn.delete {
+  background-color: #f44336;
+  color: white;
+}
+
+
+.btn.delete {
+  background-color: #f44336;
+  color: white;
+}
+
+.btn.save {
+  background-color: #2196F3;
+  color: white;
+}
+
+.btn.edit {
+  background-color: #4CAF50;
+  color: white;
+}

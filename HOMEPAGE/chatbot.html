@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chatbot with Recommendations</title>
+    <style>
+      body {
+          font-family: Arial, sans-serif;
+      }
+
+      .chatbot-button {
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          background-color: #408140;
+          color: white;
+          border: none;
+          padding: 18px;
+          border-radius: 50%;
+          cursor: pointer;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+          z-index: 1000;
+      }
+
+      .chat-container {
+          position: fixed;
+          bottom: 80px;
+          right: 20px;
+          width: 300px;
+          background-color: #fff;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+          border-radius: 10px;
+          display: none;
+          flex-direction: column;
+          overflow: hidden;
+          z-index: 1000;
+      }
+
+      .chat-box {
+          height: 300px;
+          padding: 10px;
+          overflow-y: auto;
+          border-bottom: 1px solid #f4f4f4;
+      }
+
+      .chat-box p {
+          margin: 0 0 10px;
+      }
+
+      .chat-box .user-message {
+          text-align: right;
+          color: #333;
+      }
+
+      .chat-box .bot-message {
+          text-align: left;
+          color: #408140;
+      }
+
+      .recommendation-box {
+          background-color: #f9f9f9;
+          padding: 10px;
+          border-top: 1px solid #ccc;
+      }
+
+      .recommendation-box button {
+          margin: 5px 0;
+          padding: 5px 10px;
+          background-color: #e0e0e0;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          font-size: 14px;
+      }
+
+      .recommendation-box button:hover {
+          background-color: #d0d0d0;
+      }
+
+      .input-container {
+          display: flex;
+          border-top: 1px solid #ccc;
+      }
+
+      .input-container input {
+          flex: 1;
+          padding: 10px;
+          border: none;
+          outline: none;
+          font-size: 16px;
+      }
+
+      .input-container button {
+          padding: 10px;
+          border: none;
+          background-color: #408140;
+          color: white;
+          cursor: pointer;
+          font-size: 16px;
+      }
+
+      .input-container button:hover {
+          background-color: #306430;
+      }
+
+      @media screen and (max-width: 480px) {
+          .chat-container {
+              width: 90%;
+              bottom: 50px;
+              right: 5%;
+          }
+          .chatbot-button {
+              bottom: 10px;
+              right: 5%;
+              padding: 12px;
+          }
+      }
+    </style>
+  </head>
+  <body>
+    <button class="chatbot-button" onclick="toggleChat()">💬</button>
+
+    <div class="chat-container" id="chat-container">
+      <div class="chat-box" id="chat-box"></div>
+      <div class="recommendation-box" id="recommendation-box"></div>
+      <div class="input-container">
+        <input
+          type="text"
+          id="user-input"
+          placeholder="Type your message..."
+          onkeypress="if(event.key === 'Enter') sendMessage()"
+        />
+        <button onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+
+    <script>
+      function toggleChat() {
+          const chatContainer = document.getElementById('chat-container');
+          chatContainer.style.display = chatContainer.style.display === "none" || chatContainer.style.display === "" ? "flex" : "none";
+      }
+
+      const responses = {
+          "hello": { response: "Hi there! How can I help you?", recommendations: [] },
+          "barangay clearance": {
+              response: "A Barangay Clearance is often required for employment, business permit applications, school requirements, and various legal purposes.",
+              recommendations: ["What are the requirements for a barangay clearance?", "How much does a barangay clearance cost?"]
+          },
+          "requirements for barangay clearance": {
+              response: "You will need: Filled out application form, Valid government-issued ID, Proof of residency, Cedula (Community Tax Certificate).",
+              recommendations: ["How much does a barangay clearance cost?", "Where can I apply for a barangay clearance?"]
+          },
+          "default": { response: "Sorry, I don't understand that. Can you try again?", recommendations: [] }
+      };
+
+      function getBotResponse(userInput) {
+          const input = userInput.toLowerCase();
+          return responses[input] || responses["default"];
+      }
+
+      function sendMessage() {
+          const userInput = document.getElementById("user-input").value.trim();
+          if (!userInput) return;
+
+          const chatBox = document.getElementById("chat-box");
+          const recommendationBox = document.getElementById("recommendation-box");
+
+          // Display user message
+          chatBox.innerHTML += `<p class="user-message"><strong>You:</strong> ${userInput}</p>`;
+
+          // Get bot response and recommendations
+          const { response, recommendations } = getBotResponse(userInput);
+
+          // Display bot response
+          chatBox.innerHTML += `<p class="bot-message"><strong>Bot:</strong> ${response}</p>`;
+
+          // Display recommendations
+          if (recommendations.length > 0) {
+              recommendationBox.innerHTML = "<p><strong>Suggestions:</strong></p>";
+              recommendations.forEach((recommendation) => {
+                  recommendationBox.innerHTML += `<button onclick="sendRecommendation('${recommendation}')">${recommendation}</button>`;
+              });
+          } else {
+              recommendationBox.innerHTML = "";
+          }
+
+          document.getElementById("user-input").value = "";
+          chatBox.scrollTop = chatBox.scrollHeight;
+      }
+
+      function sendRecommendation(recommendation) {
+          document.getElementById("user-input").value = recommendation;
+          sendMessage();
+      }
+    </script>
+  </body>
+</html>

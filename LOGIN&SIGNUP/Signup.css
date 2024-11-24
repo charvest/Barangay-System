@@ -1,0 +1,312 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+}
+
+.login-signup-form {
+    display: flex;
+    width: 100%;
+    max-width: 900px;
+    background: #f9f9f9;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 1.2s ease;
+    transition: box-shadow 0.3s ease;
+}
+
+.login-signup-form:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Style for the success alert message */
+.custom-alert {
+    margin-top: 15px;
+    padding: 0;
+    background-color: transparent;
+    color: #28a745;
+    font-size: 14px;
+    text-align: center;
+    display: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    box-shadow: none;
+}
+
+.custom-alert.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Style for the error alert message (username taken, password validation) */
+.custom-alert.error {
+    color: red;
+}
+
+/* Image section */
+.image-section {
+    flex-basis: 50%;
+    background: linear-gradient(135deg, #4CAF50, #00c6ff);
+    position: relative;
+}
+
+.image-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.image-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.85;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.image-section img:hover {
+    transform: scale(1.05);
+    opacity: 1;
+}
+
+.form-section {
+    flex-basis: 50%;
+    padding: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    position: relative;
+    transition: padding 0.3s ease;
+}
+
+.form-container {
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    animation: slideUp 1.5s ease-out forwards;
+    opacity: 0;
+}
+
+h1 {
+    color: #333;
+    font-size: 23px;
+    margin-bottom: 40px;
+    position: relative;
+    animation: textFadeIn 1.5s ease-out 0.5s forwards;
+    opacity: 0;
+}
+
+h1::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(135deg, #28a745, #28a745);
+    margin: 20px auto 0;
+    border-radius: 4px;
+    animation: scaleBar 0.8s ease-out 1s forwards;
+    opacity: 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+}
+
+/* Ensure inputs are within the rounded borders */
+input {
+    padding: 12px 10px; /* Adjust padding to prevent overflow */
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    font-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    animation: textFadeIn 1.8s ease-out 0.8s forwards;
+    opacity: 0;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box; /* Ensure padding does not affect the width */
+}
+
+.password-wrapper input[type="password"],
+.password-wrapper input[type="text"] {
+    width: 100%;
+    padding-right: 40px;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    padding: 12px 10px; /* Adjust padding to avoid the bug */
+    box-sizing: border-box;
+}
+
+input:focus::placeholder {
+    transform: translateY(-15px); /* TEXT  */
+    font-size: 12px; /* SIZE NG PLACE HOLDER */
+    color: #28a745; /* ITO YUNG PALIT KULAY PAG */
+}
+
+input::placeholder {
+    position: relative;
+    left: 0px;
+    color: #888;
+    transition: transform 0.3s ease, font-size 0.3s ease, color 0.3s ease;
+    padding-left: 0;
+}
+
+/* Wrapper for password input and icon */
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+input:focus {
+    outline: none;
+    border-color: #28a745; 
+}
+
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toggle-password svg {
+    width: 24px;
+    height: 24px;
+    fill: #888;
+}
+
+.toggle-password:hover svg {
+    fill: #28a745;
+}
+
+button {
+    padding: 15px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 6px 15px rgba(40, 167, 69, 0.2);
+    animation: textFadeIn 2s ease-out 1s forwards;
+    opacity: 0;
+}
+
+button:hover {
+    background: #218838;
+    box-shadow: 0 8px 20px rgba(40, 167, 69, 0.4);
+    transform: translateY(-2px);
+}
+
+p.account {
+    font-size: 14px;
+    color: #666;
+    margin-top: 20px;
+    animation: textFadeIn 2.2s ease-out 1.2s forwards;
+    opacity: 0;
+}
+
+p.account a {
+    color: #0072ff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+p.account a:hover {
+    text-decoration: underline;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes textFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleBar {
+    0% {
+        opacity: 0;
+        width: 0;
+    }
+    100% {
+        opacity: 1;
+        width: 80px;
+    }
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .login-signup-form {
+        flex-direction: column;
+        box-shadow: none;
+    }
+    
+    .image-section, .form-section {
+        flex-basis: 100%;
+    }
+
+    .image-section {
+        display: none;
+    }
+
+    .form-section {
+        padding: 50px;
+    }
+}
+
+.Logo {
+  max-width: 90px;
+  margin-bottom: 20px;
+  margin: 0 auto;
+  display: block;
+}

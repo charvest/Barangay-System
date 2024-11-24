@@ -1,0 +1,1087 @@
+html {
+  scroll-behavior: smooth;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 20px;
+  color: #408140;
+}
+
+/* Map container styling */
+#map {
+  height: 500px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto;
+  border: 2px solid #408140;
+  border-radius: 15px;
+}
+
+/* Sidebar styling */
+.sidebar {
+  background-color: white;
+  width: 250px; /* Expanded width */
+  height: 100vh;
+  padding: 20px;
+  transition: width 0.3s ease, opacity 0.3s ease; /* Smooth transition for width and opacity */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999999;
+  overflow: hidden; /* Prevents overflow when collapsing */
+}
+
+.sidebar {
+  transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.sidebar a {
+  text-decoration: none;
+}
+
+.sidebar.collapsed {
+  width: 70px !important; /* Collapsed width */
+  opacity: 0.9; /* Slight opacity change for a smooth effect */
+}
+
+.sidebar.collapsed .user-profile {
+  transform: translate(-50%);
+}
+
+/* Add a transition effect for menu items */
+.sidebar .menu-item {
+  display: flex;
+  align-items: center;
+  color: #408140;
+  margin: 30px 0;
+  cursor: pointer;
+  padding: 7px;
+}
+.menu-item span {
+  text-decoration: none;
+}
+
+/* Improved hover effect for sidebar links */
+.menu-item {
+  display: flex;
+  align-items: center;
+  color: #408140;
+  margin: 30px 0;
+  cursor: pointer;
+  padding: 10px; /* Adjust padding for better spacing */
+  border-radius: 8px; /* Rounded corners */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effects */
+}
+
+.menu-item:hover {
+  background-color: #f0f4f8; /* Light background for hover effect */
+  transform: translateX(10px); /* Subtle movement on hover */
+  color: #222223; /* Text color change */
+}
+
+.menu-item i {
+  font-size: 18px;
+  margin-right: 20px;
+  transition: transform 0.3s ease, color 0.3s ease; /* Icon-specific hover transition */
+}
+
+.menu-item:hover i {
+  color: #005f1c; /* Change icon color on hover */
+  transform: scale(1.2); /* Slightly enlarge icon */
+}
+
+.menu-item span {
+  display: inline-block;
+  transition: color 0.3s ease; /* Smooth text color transition */
+}
+
+.menu-item:hover span {
+  color: #005f1c; /* Text color on hover */
+}
+
+.sidebar.collapsed .menu-item span {
+  display: none;
+}
+
+.sidebar .logo,
+.sidebar .user-profile {
+  text-align: center;
+}
+
+.sidebar.collapsed .logo {
+  transform: translate(-28%);
+}
+/* Hide user-profile when sidebar is collapsed */
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  color: #c4c4c4;
+  padding: 10px;
+  margin-top: 20px;
+  transition: opacity 0.3s ease; /* Smooth transition for visibility */
+}
+
+.user-profile img {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.badge {
+  background-color: #6a5acd;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 12px;
+  margin-left: 10px;
+}
+
+.openbtn {
+  font-size: 1.5rem !important; /* Reduced from 1.5rem to 1.2rem */
+  cursor: pointer;
+  color: #408140;
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  right: 15px;
+  transform: translateY(-10%); /* Adjusted for better alignment */
+  z-index: 1001;
+  top: 15px;
+}
+/* Overlay for dimming the background */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+  z-index: 999; /* Below the sidebar but above the rest of the content */
+  opacity: 0; /* Initially hidden */
+  visibility: hidden; /* Prevents interaction */
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Show the overlay */
+.overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+#navbar {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 10px 30px;
+  background-color: rgba(241, 245, 249, 0.9);
+  border-radius: 40px;
+  margin: 20px auto;
+  max-width: 1000px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  position: sticky !important;
+  top: 0;
+  overflow: hidden;
+  z-index: 999999;
+}
+
+.logo {
+  width: auto;
+  height: auto;
+}
+.logo img {
+  width: 50px;
+  height: 50px;
+}
+.logo span {
+  font-size: 30px;
+  font-weight: bold;
+  color: #408140;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li {
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #408140;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 20px;
+  transition: background-color 0.3s;
+}
+
+.nav-links a:hover {
+  background-color: rgba(0, 130, 30, 0.1);
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 11px;
+  transform: translateX(-20%);
+}
+
+.sign-in {
+  display: inline-block;
+  visibility: visible;
+}
+
+.sign-in[style*="display: none;"] {
+  visibility: hidden;
+}
+
+.sign-in {
+  background-color: white;
+  border: 1px solid #408140;
+  color: #408140;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-decoration: none;
+}
+
+.sign-in:hover {
+  background-color: rgba(0, 130, 30, 0.1);
+}
+
+.get-started {
+  background-color: #408140;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-decoration: none;
+}
+
+.get-started:hover {
+  background-color: #408140;
+}
+.menu-icon {
+  display: none;
+  font-size: 30px;
+  cursor: pointer;
+  color: #408140;
+}
+
+.leaflet-control-zoom {
+  z-index: 1000 !important;
+}
+
+.image-slider {
+  position: relative;
+  width: 100%;
+  height: 400px; /* Set a fixed height for the slider */
+  overflow: hidden;
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.5s ease; /* Adjusted for smoother transitions */
+}
+
+.slides img {
+  width: 100%;
+  height: 400px; /* Maintain aspect ratio */
+  object-fit: cover; /* Ensure the images fill the container while preserving aspect ratio */
+  flex-shrink: 2; /* Prevent images from shrinking */
+}
+
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 10px;
+  color: white;
+  font-size: 24px;
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  z-index: 10; /* Ensure buttons stay above the images */
+}
+
+.slider-btn.left {
+  left: 20px;
+}
+
+.slider-btn.right {
+  right: 20px;
+}
+.mission-vision {
+  padding: 50px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url("flag.gif");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  color: white;
+  text-align: center;
+  opacity: 0; /* Initially hidden */
+  transform: translateY(100px); /* Positioned out of view */
+  transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+  border-radius: 15px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+.mission-vision.show {
+  opacity: 1; /* Fully visible */
+  transform: translateY(0); /* Move into view */
+}
+
+/* Add an overlay to darken the background slightly for better text readability */
+.mission-vision::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.1); /* Semi-transparent overlay */
+  z-index: 1;
+}
+
+/* Style the content so it appears above the overlay */
+.mission-vision * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Add some nice hover effects */
+.mission-vision:hover {
+  transform: translateY(0); /* Smooth rise-up effect */
+  opacity: 1; /* Make it fully visible on hover */
+}
+
+.mission-vision h1 {
+  font-size: 2.5em;
+  font-weight: bold;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.mission-vision p {
+  font-size: 1.2em;
+  line-height: 1.6;
+  max-width: 800px; /* Limit the width of the paragraph for better readability */
+  margin: 0 auto;
+}
+
+.mission-vision a {
+  margin-top: 30px;
+  padding: 10px 20px;
+  background-color: #ff6347; /* Attractive button color (tomato) */
+  color: white;
+  text-decoration: none;
+  font-size: 1.2em;
+  border-radius: 25px;
+  transition: background-color 0.3s ease;
+}
+
+.mission-vision a:hover {
+  background-color: #ff4500; /* Darken the button on hover */
+}
+
+.mission-container {
+  display: flex;
+  flex-direction: row !important;
+  width: auto;
+}
+
+.mission-vision.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.text-block {
+  margin: 20px;
+  width: 45%;
+}
+
+.mission-vision h3 {
+  font-size: 2em;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.mission-vision p {
+  font-size: 1.2em;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+.services {
+  padding: 50px;
+  background-color: #f4f4f4;
+  text-align: center;
+}
+
+.services h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #408140;
+}
+
+.service-cards {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 3%;
+  flex-wrap: wrap;
+}
+
+.service-card {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 30%;
+  height: auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.service-card.expanded {
+  height: auto;
+  transition: height 0.3s ease;
+}
+
+.service-card p {
+  font-size: 1em;
+  line-height: 1.5;
+}
+
+.service-card .more-info {
+  display: none;
+  margin-top: 10px;
+  font-size: 0.9em;
+  color: #333;
+}
+
+.service-card.expanded .more-info {
+  display: block;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.service-card h3 {
+  font-size: 1.5em;
+  margin-bottom: 15px;
+  color: #408140;
+}
+
+.toggle-icon {
+  font-size: 1.5em;
+  color: #408140;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  transition: transform 0.3s ease;
+}
+
+.requirements {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.requirement {
+  font-size: 1rem;
+  padding: 5px 0;
+  color: #333;
+}
+
+.divider {
+  height: 1px;
+  background-color: #ccc;
+  width: 100%;
+  margin: 5px 0;
+}
+
+footer {
+  background-color: #408140;
+  color: white;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.footer-description {
+  max-width: 600px;
+}
+
+.footer-description p {
+  font-size: 1.3rem;
+  font-weight: bold;
+  line-height: 1.4;
+}
+
+.footer-subscription {
+  max-width: 400px;
+  transform: translateY(57%);
+}
+
+.subscription-form input {
+  padding: 10px;
+  width: 70%;
+  margin-right: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+.subscription-form button {
+  padding: 10px 15px;
+  background-color: #000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.social-icons {
+  transform: translateY(20%);
+}
+
+.social-icons a {
+  margin-right: 10px;
+}
+.follow {
+  transform: translateY(20%) !important;
+  margin-right: 50px;
+}
+
+/* Footer Links */
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+
+  padding: 20px;
+  color: white;
+}
+
+.footer-column {
+  max-width: 300px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.footer-column h3 {
+  color: white; /* Highlighted header color */
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+.footer-column p {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 5px 0;
+}
+
+.footer-column a {
+  color: white; /* Links color */
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-column a:hover {
+  color: #ecf0f1; /* Hover effect */
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.social-links a {
+  font-size: 1.2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.social-links i {
+  font-size: 1.5rem;
+}
+
+.footer-bottom-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.footer-bottom a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer-logo {
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  text-align: right;
+}
+
+.footer-logo h1 {
+  font-size: 6.5rem;
+  font-family: Arial, sans-serif;
+  color: white;
+  text-transform: uppercase;
+  font-weight: bolder;
+  letter-spacing: 10px;
+}
+
+.chat-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #408140;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  box-shadow: rgba(0, 130, 30, 0.1);
+  font-size: 24px;
+}
+
+/* Chatbox container */
+.chatbox {
+  display: none;
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 320px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: rgba(0, 130, 30, 0.1);
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+/* Chatbox header */
+.chatbox-header {
+  background-color: #408140;
+  color: white;
+  padding: 15px;
+  border-radius: 10px 10px 0 0;
+  display: flex;
+  align-items: center;
+}
+
+.chatbox-header img {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.chatbox-header span {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Chat content */
+.chatbox-content {
+  padding: 15px;
+}
+
+.chatbox-content .message {
+  background-color: #f1f5f9;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.chatbox-content .user-message {
+  background-color: #e0f7fa;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  text-align: right;
+}
+
+.chatbox-content button {
+  background: none;
+  border: 1px solid #408140;
+  color: #408140;
+  padding: 8px;
+  width: 100%;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Chatbox footer */
+.chatbox-footer {
+  background-color: #f1f5f9;
+  padding: 10px;
+  border-radius: 0 0 10px 10px;
+  display: flex;
+  align-items: center;
+}
+
+.chatbox-footer input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+}
+
+.chatbox-footer button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+/* General styling for the news container */
+.news-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  padding: 40px;
+  background-color: #f3f4f6;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.news-container:hover {
+  background-color: #e2e8f0; /* Subtle background color change on hover */
+}
+
+/* Each individual news item */
+.news-item {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.news-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Styling the image inside the news item */
+.news-item img {
+  object-fit: cover;
+  width: 100%;
+  height: 200px;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.news-item img:hover {
+  opacity: 0.9;
+}
+
+/* Styling the content section */
+.news-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* News title styling */
+.news-title {
+  font-size: 1.75em;
+  font-family: "Poppins", sans-serif;
+  margin-bottom: 10px;
+  color: #2d3748;
+  transition: color 0.3s ease;
+}
+
+.news-title:hover {
+  color: #408140;
+}
+
+/* News description styling */
+.news-description {
+  font-size: 1em;
+  color: #4a5568;
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+/* "Read More" link styling */
+.news-readmore {
+  color: #408140;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: auto;
+  transition: color 0.3s ease;
+}
+
+.news-readmore:hover {
+  color: #408140;
+  text-decoration: underline;
+}
+
+/* Responsive adjustments */
+/* Ensure table container allows horizontal scrolling if needed */
+.table-container {
+  width: 100%;
+  overflow-x: auto; /* Enable horizontal scroll on small screens */
+  margin-top: 20px;
+}
+
+/* Make sure table takes full width */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 5px;
+}
+
+table th,
+table td {
+  padding: 10px 5px; /* Reduce padding to fit all columns */
+  text-align: center;
+  font-size: 14px; /* Smaller font for compact view */
+}
+
+/* Add overflow scrolling for large datasets */
+.table-container-scrollable {
+  max-height: 400px; /* Adjust height as necessary */
+  overflow-y: scroll;
+}
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+.btn {
+  cursor: pointer;
+  padding: 5px;
+}
+
+.btn.edit {
+  background-color: #4caf50;
+  color: white;
+}
+
+.btn.delete {
+  background-color: #f44336;
+  color: white;
+}
+
+.btn.delete {
+  background-color: #f44336;
+  color: white;
+}
+
+.btn.save {
+  background-color: #2196f3;
+  color: white;
+}
+
+.btn.edit {
+  background-color: #4caf50;
+  color: white;
+}
+
+.tabs-container {
+  width: 100%; /* Ensure the container takes full width */
+  justify-content: center;
+  flex-direction: column !important;
+  align-items: flex-start;
+  padding: 0 10px; /* Add padding to avoid touching screen edges on smaller devices */
+}
+
+.form-container {
+  align-items: flex-start;
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+  width: 100%;
+  transform: translateY(-700%);
+}
+
+.form-control {
+  width: 50%;
+  margin-right: 10px;
+  padding: 10px;
+}
+.search-btn {
+  padding: 10px;
+}
+/* Centering and enlarging the table */
+table {
+  transform: translateY(-100%);
+  width: 80%; /* Slightly larger width */
+  margin: 0 auto;
+  border-collapse: separate;
+  border-spacing: 0 12px;
+}
+
+table th,
+table td {
+  padding: 14px 24px;
+  text-align: center; /* Center-align text */
+  font-size: 16px;
+}
+
+table th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+  font-size: 17px;
+}
+
+table tbody tr {
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+table tbody td {
+  font-size: 15px;
+}
+@media (max-width: 768px) {
+  .navbar {
+    padding: 10px;
+  }
+  .nav-links {
+    display: none; /* Hide menu links on small screens */
+  }
+  .sidebar.collapsed {
+    display: none;
+  }
+  .openbtn {
+    display: inline-block;
+    top: 15px;
+  }
+  /* Adjust login/signup button styling for small screens */
+  .sign-in,
+  .get-started {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+  }
+  /* Form elements */
+  .form-selection button {
+    width: 100%; /* Stack buttons */
+    margin-bottom: 10px;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  select {
+    width: 100%; /* Full width on small screens */
+  }
+
+  /* Footer responsive styles */
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .footer-description,
+  .footer-links,
+  .footer-subscription {
+    max-width: 100%;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 0;
+  }
+}
+@media (max-width: 480px) {
+  header {
+    height: 18vh;
+  }
+  .sidebar {
+    width: 200px;
+  }
+
+  .sidebar.collapsed {
+    display: none;
+  }
+  .navbar {
+    padding: 8px 15px;
+  }
+
+  .logo span {
+    margin-left: 20px;
+    font-size: 1.5rem;
+  }
+
+  /* Display the toggle button */
+  .openbtn {
+    font-size: 1.5rem !important;
+    display: block;
+    margin: -3 5;
+  }
+
+  .container {
+    padding: 20px 10px;
+  }
+
+  .form-selection {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .user-profile {
+    display: none;
+  }
+}

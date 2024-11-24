@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+}
+
+.login-signup-form {
+    display: flex;
+    width: 100%;
+    max-width: 900px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 1.2s ease;
+}
+
+.image-section {
+    flex-basis: 50%;
+    background: linear-gradient(135deg, #4CAF50, #00c6ff);
+}
+
+.image-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.85;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.image-section img:hover {
+    transform: scale(1.05);
+    opacity: 1;
+}
+
+.form-section {
+    flex-basis: 50%;
+    padding: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+}
+
+.form-container {
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    animation: slideUp 1.5s ease-out forwards;
+    opacity: 0;
+}
+
+h1 {
+    color: #333;
+    font-size: 28px;
+    margin-bottom: 40px;
+    position: relative;
+    animation: textFadeIn 1.5s ease-out 0.5s forwards;
+    opacity: 0;
+}
+
+h1::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(135deg, #28a745, #28a745);
+    margin: 20px auto 0;
+    border-radius: 4px;
+    animation: scaleBar 0.8s ease-out 1s forwards;
+    opacity: 0;
+}
+
+p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+input[type="email"] {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    font-size: 16px;
+    width: 100%;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: #28a745; 
+}
+
+button.btn {
+    padding: 15px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 6px 15px rgba(40, 167, 69, 0.2);
+}
+
+button.btn:hover {
+    background: #218838;
+    box-shadow: 0 8px 20px rgba(40, 167, 69, 0.4);
+}
+
+/* Alert styling */
+.custom-alert {
+    display: none;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+    background-color: #d4edda; /* Light green background for success */
+    color: #155724;           /* Dark green text for success */
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.custom-alert.error {
+    background-color: #f8d7da; /* Light red background for error */
+    color: #721c24;           /* Dark red text for error */
+}
+
+.custom-alert.show {
+    display: block;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+p.account {
+    font-size: 14px;
+    color: #666;
+    margin-top: 20px;
+}
+
+p.account a {
+    color: #0072ff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+p.account a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .login-signup-form {
+        flex-direction: column;
+        box-shadow: none;
+    }
+    
+    .image-section {
+        display: none;
+    }
+
+    .form-section {
+        padding: 50px;
+    }
+}
+
+.Logo {
+    max-width: 85px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    display: block;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes textFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleBar {
+    0% {
+        opacity: 0;
+        width: 0;
+    }
+    100% {
+        opacity: 1;
+        width: 80px;
+    }
+}
